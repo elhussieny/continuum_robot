@@ -78,8 +78,6 @@ Rot.getRotation(qRot);
 endEffectorPose[segID].setRotation(basePose[segID].getRotation() * qRot);
 
 tf::Vector3 eePosition = basePose[segID].getOrigin() + ( tf::Matrix3x3(basePose[segID].getRotation())*tf::Vector3(cos(phi)*( cos(kappa*segmentLength[segID]) - 1)/kappa, sin(phi)*( cos(kappa*segmentLength[segID]) - 1)/kappa, sin(kappa*segmentLength[segID])/kappa));
-
-
 endEffectorPose[segID].setOrigin(eePosition);
 
 }
@@ -101,9 +99,13 @@ for(int i=0;i<noOfDisks[segID];i++){
 	eeP =  tf::Matrix3x3(basePose[segID].getRotation())*eeP;
 	this->segTFFrame[segID][i].setOrigin(tf::Vector3(basePose[segID].getOrigin().x() + eeP.getX(), basePose[segID].getOrigin().y() + eeP.getY(), basePose[segID].getOrigin().z() + eeP.getZ()) );
 
-		// Slerp for spherical interpolation
-		slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
+	slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
+
+	if(segKappa[segID]*segmentLength[segID]>PI) // to prevent the flip of the slerp when the angle theta>180 deg. i.e Kappa*Lengh >= PI
+		this->segTFFrame[segID][i].setRotation(slerpQuaternion.inverse());
+	else
 		this->segTFFrame[segID][i].setRotation(slerpQuaternion);
+
 		sprintf(childFrameName, "S%dL%d", segID,i);
 		segTFBroadcaster[segID].sendTransform(tf::StampedTransform(segTFFrame[segID][i], ros::Time::now(),"base_link",childFrameName));
 
@@ -156,11 +158,11 @@ robotURDFfile<<endl;
 		  robotURDFfile << "<origin rpy=\"0 0 0\" xyz=\"0 0 "<<(disk/(n_disks-1))*segLength<<"\"/>"<<endl;
 		  robotURDFfile << "</geometry>"<<endl;
 		  robotURDFfile <<"</visual>"<<endl;
-		  robotURDFfile <<"<collision>"<<endl;
+/*		  robotURDFfile <<"<collision>"<<endl;
 		  robotURDFfile <<"<geometry>"<<endl;
 		  robotURDFfile << "<cylinder length=\"0.1\" radius=\""<<radius<<"\"/>"<<endl;
 		  robotURDFfile << "</geometry>"<<endl;
-		  robotURDFfile <<"</collision>"<<endl;
+		  robotURDFfile <<"</collision>"<<endl;*/
 		  robotURDFfile <<"</link>"<<endl;
 		  robotURDFfile <<endl;
 		  robotURDFfile<<"<joint name=\"S"<<segID<<"J"<<disk<<"\" type=\"floating\">"<<endl;

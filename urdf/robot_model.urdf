@@ -9,11 +9,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J0" type="floating">
@@ -28,11 +23,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J1" type="floating">
@@ -47,11 +37,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J2" type="floating">
@@ -66,11 +51,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J3" type="floating">
@@ -85,11 +65,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J4" type="floating">
@@ -104,11 +79,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J5" type="floating">
@@ -123,11 +93,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J6" type="floating">
@@ -142,11 +107,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J7" type="floating">
@@ -161,11 +121,6 @@
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J8" type="floating">
@@ -180,588 +135,11 @@
 <origin rpy="0 0 0" xyz="0 0 5"/>
 </geometry>
 </visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-</geometry>
-</collision>
 </link>
 
 <joint name="S0J9" type="floating">
 <parent link="base_link"/>
 <child link="S0L9"/>
-</joint>
-
-
-<link name="S1L0">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J0" type="floating">
-<parent link="base_link"/>
-<child link="S1L0"/>
-</joint>
-
-<link name="S1L1">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J1" type="floating">
-<parent link="base_link"/>
-<child link="S1L1"/>
-</joint>
-
-<link name="S1L2">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J2" type="floating">
-<parent link="base_link"/>
-<child link="S1L2"/>
-</joint>
-
-<link name="S1L3">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J3" type="floating">
-<parent link="base_link"/>
-<child link="S1L3"/>
-</joint>
-
-<link name="S1L4">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J4" type="floating">
-<parent link="base_link"/>
-<child link="S1L4"/>
-</joint>
-
-<link name="S1L5">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J5" type="floating">
-<parent link="base_link"/>
-<child link="S1L5"/>
-</joint>
-
-<link name="S1L6">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J6" type="floating">
-<parent link="base_link"/>
-<child link="S1L6"/>
-</joint>
-
-<link name="S1L7">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J7" type="floating">
-<parent link="base_link"/>
-<child link="S1L7"/>
-</joint>
-
-<link name="S1L8">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J8" type="floating">
-<parent link="base_link"/>
-<child link="S1L8"/>
-</joint>
-
-<link name="S1L9">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J9" type="floating">
-<parent link="base_link"/>
-<child link="S1L9"/>
-</joint>
-
-<link name="S1L10">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J10" type="floating">
-<parent link="base_link"/>
-<child link="S1L10"/>
-</joint>
-
-<link name="S1L11">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J11" type="floating">
-<parent link="base_link"/>
-<child link="S1L11"/>
-</joint>
-
-<link name="S1L12">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J12" type="floating">
-<parent link="base_link"/>
-<child link="S1L12"/>
-</joint>
-
-<link name="S1L13">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J13" type="floating">
-<parent link="base_link"/>
-<child link="S1L13"/>
-</joint>
-
-<link name="S1L14">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J14" type="floating">
-<parent link="base_link"/>
-<child link="S1L14"/>
-</joint>
-
-<link name="S1L15">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J15" type="floating">
-<parent link="base_link"/>
-<child link="S1L15"/>
-</joint>
-
-<link name="S1L16">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J16" type="floating">
-<parent link="base_link"/>
-<child link="S1L16"/>
-</joint>
-
-<link name="S1L17">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J17" type="floating">
-<parent link="base_link"/>
-<child link="S1L17"/>
-</joint>
-
-<link name="S1L18">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J18" type="floating">
-<parent link="base_link"/>
-<child link="S1L18"/>
-</joint>
-
-<link name="S1L19">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-<origin rpy="0 0 0" xyz="0 0 10"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.3"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S1J19" type="floating">
-<parent link="base_link"/>
-<child link="S1L19"/>
-</joint>
-
-
-<link name="S2L0">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J0" type="floating">
-<parent link="base_link"/>
-<child link="S2L0"/>
-</joint>
-
-<link name="S2L1">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J1" type="floating">
-<parent link="base_link"/>
-<child link="S2L1"/>
-</joint>
-
-<link name="S2L2">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J2" type="floating">
-<parent link="base_link"/>
-<child link="S2L2"/>
-</joint>
-
-<link name="S2L3">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J3" type="floating">
-<parent link="base_link"/>
-<child link="S2L3"/>
-</joint>
-
-<link name="S2L4">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J4" type="floating">
-<parent link="base_link"/>
-<child link="S2L4"/>
-</joint>
-
-<link name="S2L5">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J5" type="floating">
-<parent link="base_link"/>
-<child link="S2L5"/>
-</joint>
-
-<link name="S2L6">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J6" type="floating">
-<parent link="base_link"/>
-<child link="S2L6"/>
-</joint>
-
-<link name="S2L7">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J7" type="floating">
-<parent link="base_link"/>
-<child link="S2L7"/>
-</joint>
-
-<link name="S2L8">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J8" type="floating">
-<parent link="base_link"/>
-<child link="S2L8"/>
-</joint>
-
-<link name="S2L9">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-<origin rpy="0 0 0" xyz="0 0 4"/>
-</geometry>
-</visual>
-<collision>
-<geometry>
-<cylinder length="0.1" radius="0.2"/>
-</geometry>
-</collision>
-</link>
-
-<joint name="S2J9" type="floating">
-<parent link="base_link"/>
-<child link="S2L9"/>
 </joint>
 
 </robot>
