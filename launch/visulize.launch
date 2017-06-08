@@ -1,0 +1,3 @@
+<launch>
+    <param name="robot_description" command="cat $(find continuum_robot)/urdf/robot_model.urdf" />
+</launch>

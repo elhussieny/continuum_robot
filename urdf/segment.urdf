@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot name="segment">
+<!-- SEGMNET 1 (10 DISKS)-->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.5"/>
+      </geometry>
+    </visual>
+  </link>
+
+ <link name="seg1">
+    <visual>
+      <geometry>
+   <cylinder length="0.1" radius="0.5"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+   <link name="seg2">
+    <visual>
+      <geometry>
+   <cylinder length="0.1" radius="0.5"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+ <joint name="segment1" type="floating">
+		<parent link="base_link"/>
+		<child link="seg1"/>
+</joint>
+
+<joint name="segment2" type="floating">
+		<parent link="base_link"/>
+		<child link="seg2"/>
+</joint>
+
+ </robot>

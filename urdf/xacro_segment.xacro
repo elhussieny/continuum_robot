@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="segment">
+
+<xacro:property name="disk_length" value="0.1" />
+<xacro:property name="disk_radius" value="0.5" />
+<!-- SEGMNET 1 (10 DISKS)-->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="${disk_length}" radius="${disk_radius}"/>
+      </geometry>
+    </visual>
+  </link>
+
+ <link name="seg1">
+    <visual>
+      <geometry>
+   <cylinder length="${disk_length}" radius="${disk_radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+   <link name="seg2">
+    <visual>
+      <geometry>
+   <cylinder length="${disk_length}" radius="${disk_radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </visual>
+  </link>
+
+ <joint name="segment1" type="floating">
+		<parent link="base_link"/>
+		<child link="seg1"/>
+</joint>
+
+<joint name="segment2" type="floating">
+		<parent link="base_link"/>
+		<child link="seg2"/>
+</joint>
+
+ </robot>
