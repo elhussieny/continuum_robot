@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <fstream>
 #include <ros/package.h>
+#include <visualization_msgs/MarkerArray.h>
+
 using namespace std;
 #define PI 3.1415926
 #define RESOLUTION 100
@@ -24,6 +26,8 @@ private:
 	 tf::Transform* basePose;
 	 tf::Transform** segTFFrame; // array of array segTFFrame[segID][diskNo]
 	 tf::TransformBroadcaster* segTFBroadcaster;
+	 visualization_msgs::MarkerArray* cableMarkers;
+	 ros::Publisher* cablePublisher;
 
 	 double* segmentLength;
 	 int* noOfDisks;
@@ -34,13 +38,13 @@ private:
 	 //-------------------------------------------------------------
 	 std_msgs::String robotName;
 	 ofstream robotURDFfile;
-
-
+	 void createURDF(int segID, double length, int n_disks, double radius);
+	 void initCableMarker(int segID);
 
 public:
 	Continuum(int noOfSeg);
 	void addSegment(int segID, double length, int n_disks, double radius);
-	void createURDF(int segID, double length, int n_disks, double radius);
+
 	void setSegmentBasePose(int segID, tf::Vector3 basePos, tf::Quaternion baseRot);
 	void setSegmentShape(int segID, double kappa, double phi);
 	void update(void);

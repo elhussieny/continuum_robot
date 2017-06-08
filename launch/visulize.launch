@@ -1,3 +1,5 @@
 <launch>
-    <param name="robot_description" command="cat $(find continuum_robot)/urdf/robot_model.urdf" />
+<arg name="gui" default="False" />
+    <param name="robot_description" textfile="$(find continuum_robot)/urdf/robot_model.urdf"/>
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find continuum_robot)/urdf/continuum.rviz"/>
 </launch>

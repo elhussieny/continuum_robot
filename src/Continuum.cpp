@@ -9,6 +9,8 @@
 
 Continuum::Continuum(int noOfSeg){	// TODO Auto-generated constructor stub
 // TODO Robot name
+	ros::NodeHandle nh_;
+	char cableTopic[30];
 this->numberOfSegments = noOfSeg;
 this->segmentLength = new double(noOfSeg);
 this->noOfDisks = new int(noOfSeg);
@@ -18,15 +20,26 @@ this->segKappa = new double[noOfSeg];
 this->segPhi = new double[noOfSeg];
 this->segTFBroadcaster = new tf::TransformBroadcaster[noOfSeg];
 this->segTFFrame  = (tf::Transform**) malloc(noOfSeg * sizeof(tf::Transform*)); // https://stackoverflow.com/questions/455960/dynamic-allocating-array-of-arrays-in-c
+this->cableMarkers = new visualization_msgs::MarkerArray[noOfSeg];
+this->cablePublisher = new ros::Publisher[noOfSeg];
+for(int s=0; s<noOfSeg; s++)
+{
+	sprintf(cableTopic, "cable_%d", s);
+	cableMarkers[s].markers.resize(RESOLUTION);
+	cablePublisher[s] = nh_.advertise<visualization_msgs::MarkerArray>(cableTopic,1);
 }
 
-//
+}
+/******************************************************/
+
 void Continuum::addSegment(int segID, double segLength, int n_disks, double radius){	// TODO Auto-generated constructor stub
 	// Continuum robot segment
 	this->createURDF(segID, segLength, n_disks, radius);
 	segTFFrame[segID] = (tf::Transform*) malloc(n_disks*sizeof(tf::Transform));
 	segmentLength[segID] = segLength;
 	noOfDisks[segID] = n_disks;
+	initCableMarker(segID);
+
 if(segID >0)
 {
 	basePose[segID].setOrigin(endEffectorPose[segID-1].getOrigin());
@@ -44,9 +57,9 @@ else
 	segKappa[segID] = 0.00001; // Very small number
 	segPhi[segID] = 0.0; // zero
 }
+/******************************************************/
 
-
-void 	Continuum::setSegmentBasePose(int segID, tf::Vector3 basePos, tf::Quaternion baseRot){
+void Continuum::setSegmentBasePose(int segID, tf::Vector3 basePos, tf::Quaternion baseRot){
 	basePose[segID].setOrigin(basePos);
 	basePose[segID].setRotation(baseRot);
 	}
@@ -70,6 +83,7 @@ tf::Vector3 eePosition = basePose[segID].getOrigin() + ( tf::Matrix3x3(basePose[
 endEffectorPose[segID].setOrigin(eePosition);
 
 }
+/******************************************************/
 
 void Continuum::update(void) {
 char childFrameName[30];
@@ -99,14 +113,25 @@ for(int i=0;i<noOfDisks[segID];i++){
 		eePc[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
 		eePc[1] =  sin(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
 		eePc[2] = (sin(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID]))/segKappa[segID]);
+
 		eePc =  tf::Matrix3x3(basePose[segID].getRotation())*eePc;
+		cableMarkers[segID].markers[i].pose.position.x = basePose[segID].getOrigin().x()+ eePc[0];
+				cableMarkers[segID].markers[i].pose.position.y = basePose[segID].getOrigin().y()+ eePc[1];
+				cableMarkers[segID].markers[i].pose.position.z = basePose[segID].getOrigin().z()+ eePc[2];
 		// Slerp for spherical interpolation
 			slerpQuaternionCable = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)RESOLUTION-1))));
+			cableMarkers[segID].markers[i].pose.orientation.x = slerpQuaternionCable.x();
+			cableMarkers[segID].markers[i].pose.orientation.y = slerpQuaternionCable.y();
+			cableMarkers[segID].markers[i].pose.orientation.z = slerpQuaternionCable.z();
+			cableMarkers[segID].markers[i].pose.orientation.w = slerpQuaternionCable.w();
 
 		}
+cablePublisher[segID].publish(cableMarkers[segID]);
+}
 rate.sleep();
+
 }
-}
+/******************************************************/
 
 void Continuum::createURDF(int segID, double segLength, int n_disks, double radius){	// TODO Auto-generated constructor stub
 	 std::string path= ros::package::getPath("continuum_robot");  path =path+ "/urdf/robot_model.urdf";
@@ -149,9 +174,42 @@ robotURDFfile<<endl;
 	  robotURDFfile.close();
 
 }
+/******************************************************/
+void Continuum::initCableMarker(int segID){
+	uint32_t shape = visualization_msgs::Marker::SPHERE;
 
+	  for(int r=0; r<RESOLUTION; r++)
+	  {
 
+	    // Set the frame ID and timestamp.  See the TF tutorials for information on these.
+	    cableMarkers[segID].markers[r].header.frame_id = "base_link";
+	    cableMarkers[segID].markers[r].header.stamp = ros::Time::now();
 
+	    // Set the namespace and id for this marker.  This serves to create a unique ID
+	    // Any marker sent with the same namespace and id will overwrite the old one
+	    cableMarkers[segID].markers[r].ns = "basic_shapes";
+	    cableMarkers[segID].markers[r].id = r;
+
+	    // Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
+	    cableMarkers[segID].markers[r].type = shape;
+
+	    // Set the marker action.  Options are ADD, DELETE, and new in ROS Indigo: 3 (DELETEALL)
+	    cableMarkers[segID].markers[r].action = visualization_msgs::Marker::ADD;
+
+	    // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
+
+	    // Set the scale of the marker -- 1x1x1 here means 1m on a side
+	    cableMarkers[segID].markers[r].scale.x = .1;
+	    cableMarkers[segID].markers[r].scale.y = .1;
+	    cableMarkers[segID].markers[r].scale.z = .1;
+
+	    // Set the color -- be sure to set alpha to something non-zero!
+	    cableMarkers[segID].markers[r].color.b = 1.0f;
+	    cableMarkers[segID].markers[r].color.a = 1.0;
+	    cableMarkers[segID].markers[r].lifetime = ros::Duration();
+	  }
+}
+/******************************************************/
 Continuum::~Continuum() {
 	// TODO Auto-generated destructor stub
 }
