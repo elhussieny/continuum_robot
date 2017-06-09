@@ -64,7 +64,7 @@ void Continuum::setSegmentBasePose(int segID, tf::Vector3 basePos, tf::Quaternio
 	basePose[segID].setRotation(baseRot);
 	}
 
-
+/******************************************************/
 void Continuum::setSegmentShape(int segID, double kappa, double phi){
 	segKappa[segID] = kappa;
 	segPhi[segID] = phi;
@@ -90,24 +90,22 @@ for (int segID = 0;segID<this->numberOfSegments;segID++)
 {
 	tf::Quaternion slerpQuaternion;
 	tf::Quaternion slerpQuaternionCable;
-tf::Vector3 eeP;
-tf::Vector3 eePc;
+	tf::Vector3 eeP;
+	tf::Vector3 eePc;
 for(int i=0;i<noOfDisks[segID];i++){
 	eeP[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1)/segKappa[segID];
 	eeP[1] = sin(segPhi[segID])*( cos(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1)/segKappa[segID];
 	eeP[2] = (sin(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID]))/segKappa[segID]);
 	eeP =  tf::Matrix3x3(basePose[segID].getRotation())*eeP;
 	this->segTFFrame[segID][i].setOrigin(tf::Vector3(basePose[segID].getOrigin().x() + eeP.getX(), basePose[segID].getOrigin().y() + eeP.getY(), basePose[segID].getOrigin().z() + eeP.getZ()) );
-
+	if(segKappa[segID]*segmentLength[segID]>PI)
 	slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
-
-	if(segKappa[segID]*segmentLength[segID]>PI) // to prevent the flip of the slerp when the angle theta>180 deg. i.e Kappa*Lengh >= PI
-		this->segTFFrame[segID][i].setRotation(slerpQuaternion.inverse());
 	else
-		this->segTFFrame[segID][i].setRotation(slerpQuaternion);
+		slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
 
-		sprintf(childFrameName, "S%dL%d", segID,i);
-		segTFBroadcaster[segID].sendTransform(tf::StampedTransform(segTFFrame[segID][i], ros::Time::now(),"base_link",childFrameName));
+	this->segTFFrame[segID][i].setRotation(slerpQuaternion);
+	sprintf(childFrameName, "S%dL%d", segID,i);
+	segTFBroadcaster[segID].sendTransform(tf::StampedTransform(segTFFrame[segID][i], ros::Time::now(),"base_link",childFrameName));
 
 	}
 
@@ -122,10 +120,10 @@ for(int i=0;i<noOfDisks[segID];i++){
 				cableMarkers[segID].markers[i].pose.position.z = basePose[segID].getOrigin().z()+ eePc[2];
 		// Slerp for spherical interpolation
 			slerpQuaternionCable = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)RESOLUTION-1))));
-			cableMarkers[segID].markers[i].pose.orientation.x = slerpQuaternionCable.x();
-			cableMarkers[segID].markers[i].pose.orientation.y = slerpQuaternionCable.y();
-			cableMarkers[segID].markers[i].pose.orientation.z = slerpQuaternionCable.z();
-			cableMarkers[segID].markers[i].pose.orientation.w = slerpQuaternionCable.w();
+			cableMarkers[segID].markers[i].pose.orientation.x = 0;//slerpQuaternionCable.x();
+			cableMarkers[segID].markers[i].pose.orientation.y = 0;//slerpQuaternionCable.y();
+			cableMarkers[segID].markers[i].pose.orientation.z = 0;//slerpQuaternionCable.z();
+			cableMarkers[segID].markers[i].pose.orientation.w = 1;//slerpQuaternionCable.w();
 
 		}
 cablePublisher[segID].publish(cableMarkers[segID]);
