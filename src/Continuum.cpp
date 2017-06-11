@@ -80,36 +80,73 @@ endEffectorPose[segID].setRotation(basePose[segID].getRotation() * qRot);
 tf::Vector3 eePosition = basePose[segID].getOrigin() + ( tf::Matrix3x3(basePose[segID].getRotation())*tf::Vector3(cos(phi)*( cos(kappa*segmentLength[segID]) - 1)/kappa, sin(phi)*( cos(kappa*segmentLength[segID]) - 1)/kappa, sin(kappa*segmentLength[segID])/kappa));
 endEffectorPose[segID].setOrigin(eePosition);
 
+for (int s=segID+1;s<this->numberOfSegments;s++)
+
+{
+
+	basePose[s].setOrigin(endEffectorPose[s-1].getOrigin());
+	basePose[s].setRotation(endEffectorPose[s-1].getRotation());
+	if(s==1){
+			endEffectorPose[s].setOrigin(basePose[s].getOrigin() + tf::Matrix3x3(basePose[s].getRotation())*getDiskPosition(s,(noOfDisks[s]-1)));
+			endEffectorPose[s].setRotation(basePose[s].getRotation()*getDiskQuaternion(s,(noOfDisks[s]-1)));
+			}//
+
+	}
 }
 /******************************************************/
 
+tf::Quaternion Continuum::getDiskQuaternion(int segID, int diskID){
+tf::Matrix3x3 Rot;
+tf::Quaternion qRot;
+Rot.setValue(pow(cos(segPhi[segID]),2) * (cos(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1) + 1, sin(segPhi[segID])*cos(segPhi[segID])*( cos(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1), -cos(segPhi[segID])*sin(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])),
+						sin(segPhi[segID])*cos(segPhi[segID])*( cos(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1), pow(cos(segPhi[segID]),2) * ( 1 - cos(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])) ) + cos( segKappa[segID] * ((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])),  -sin(segPhi[segID])*sin(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])),
+						 cos(segPhi[segID])*sin(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])),  sin(segPhi[segID])*sin(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])), cos(segKappa[segID]*((diskID/((double)noOfDisks[segID]-1))*segmentLength[segID])));
+Rot.getRotation(qRot);
+//endEffectorPose[segID].setRotation(basePose[segID].getRotation() * qRot);
+return qRot;
+
+}
+/******************************************************/
+
+tf::Vector3 Continuum::getDiskPosition(int segID, int i){
+	tf::Vector3 eeP;
+	eeP[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1)/segKappa[segID];
+		eeP[1] = sin(segPhi[segID])*( cos(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1)/segKappa[segID];
+		eeP[2] = (sin(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID]))/segKappa[segID]);
+		return eeP;
+}
+/******************************************************/
 void Continuum::update(void) {
 char childFrameName[30];
-ros::Rate rate(1);
+ros::Rate rate(15);
 for (int segID = 0;segID<this->numberOfSegments;segID++)
 {
 	tf::Quaternion slerpQuaternion;
 	tf::Quaternion slerpQuaternionCable;
 	tf::Vector3 eeP;
+
 	tf::Vector3 eePc;
-for(int i=0;i<noOfDisks[segID];i++){
+for(int i=0;i<noOfDisks[segID]&&ros::ok();i++){
 	eeP[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1)/segKappa[segID];
 	eeP[1] = sin(segPhi[segID])*( cos(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID])) - 1)/segKappa[segID];
 	eeP[2] = (sin(segKappa[segID]*((i/((double)noOfDisks[segID]-1))*segmentLength[segID]))/segKappa[segID]);
 	eeP =  tf::Matrix3x3(basePose[segID].getRotation())*eeP;
-	this->segTFFrame[segID][i].setOrigin(tf::Vector3(basePose[segID].getOrigin().x() + eeP.getX(), basePose[segID].getOrigin().y() + eeP.getY(), basePose[segID].getOrigin().z() + eeP.getZ()) );
-	if(segKappa[segID]*segmentLength[segID]>PI)
-	slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
-	else
-		slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
 
-	this->segTFFrame[segID][i].setRotation(slerpQuaternion);
+
+	this->segTFFrame[segID][i].setOrigin(tf::Vector3(basePose[segID].getOrigin().x() + eeP.getX(), basePose[segID].getOrigin().y() + eeP.getY(), basePose[segID].getOrigin().z() + eeP.getZ()) );
+
+
+
+
+//	slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
+
+	this->segTFFrame[segID][i].setRotation(basePose[segID].getRotation() * getDiskQuaternion(segID,i));
 	sprintf(childFrameName, "S%dL%d", segID,i);
 	segTFBroadcaster[segID].sendTransform(tf::StampedTransform(segTFFrame[segID][i], ros::Time::now(),"base_link",childFrameName));
 
 	}
 
-	for(int i=0;i<RESOLUTION;i++){
+	for(int i=0;i<RESOLUTION&&ros::ok();i++){
 		eePc[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
 		eePc[1] =  sin(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
 		eePc[2] = (sin(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID]))/segKappa[segID]);
@@ -119,7 +156,7 @@ for(int i=0;i<noOfDisks[segID];i++){
 				cableMarkers[segID].markers[i].pose.position.y = basePose[segID].getOrigin().y()+ eePc[1];
 				cableMarkers[segID].markers[i].pose.position.z = basePose[segID].getOrigin().z()+ eePc[2];
 		// Slerp for spherical interpolation
-			slerpQuaternionCable = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)RESOLUTION-1))));
+		//	slerpQuaternionCable = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)RESOLUTION-1))));
 			cableMarkers[segID].markers[i].pose.orientation.x = 0;//slerpQuaternionCable.x();
 			cableMarkers[segID].markers[i].pose.orientation.y = 0;//slerpQuaternionCable.y();
 			cableMarkers[segID].markers[i].pose.orientation.z = 0;//slerpQuaternionCable.z();
@@ -143,6 +180,9 @@ robotURDFfile.open (path.c_str(), std::fstream::app);
 robotURDFfile << "<?xml version=\"1.0\"?>" <<endl;
 robotURDFfile << "<robot name=\"continuum_robot\">"<<endl;
 robotURDFfile << "<link name=\"base_link\"/>"<<endl;
+robotURDFfile << "<material name=\"while\">"<<endl;
+robotURDFfile << "<color rgba=\"0 1 0 1\"/>"<<endl;
+robotURDFfile << "</material>"<<endl;
 }
 else{robotURDFfile.open (path.c_str(), std::fstream::app);}
 
@@ -152,9 +192,15 @@ robotURDFfile<<endl;
 		  robotURDFfile << "<link name=\"S"<<segID<<"L"<<disk<<"\">"<<endl;
 		  robotURDFfile << "<visual>"<<endl;
 		  robotURDFfile << "<geometry>"<<endl;
+		  if(segID==0&&disk==0)
+			  robotURDFfile << "<box size=\"1 1 0.5\"/>"<<endl;
+		  else
 		  robotURDFfile << "<cylinder length=\"0.1\" radius=\""<<radius<<"\"/>"<<endl;
 		  robotURDFfile << "<origin rpy=\"0 0 0\" xyz=\"0 0 "<<(disk/(n_disks-1))*segLength<<"\"/>"<<endl;
 		  robotURDFfile << "</geometry>"<<endl;
+		  if(segID==0&&disk==0)
+		  			  robotURDFfile << "<material name=\"white\"/>"<<endl;
+		  		 // else
 		  robotURDFfile <<"</visual>"<<endl;
 /*		  robotURDFfile <<"<collision>"<<endl;
 		  robotURDFfile <<"<geometry>"<<endl;

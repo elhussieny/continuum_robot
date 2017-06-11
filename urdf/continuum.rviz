@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /TF1
+        - /TF1/Frames1
         - /MarkerArray1
         - /MarkerArray2
         - /MarkerArray3
@@ -273,19 +275,181 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: false
+      Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
-      Marker Scale: 1
+        All Enabled: false
+        S0L0:
+          Value: false
+        S0L1:
+          Value: false
+        S0L2:
+          Value: false
+        S0L3:
+          Value: false
+        S0L4:
+          Value: false
+        S0L5:
+          Value: false
+        S0L6:
+          Value: false
+        S0L7:
+          Value: false
+        S0L8:
+          Value: false
+        S0L9:
+          Value: false
+        S1L0:
+          Value: false
+        S1L1:
+          Value: false
+        S1L10:
+          Value: false
+        S1L11:
+          Value: false
+        S1L12:
+          Value: false
+        S1L13:
+          Value: false
+        S1L14:
+          Value: false
+        S1L15:
+          Value: false
+        S1L16:
+          Value: false
+        S1L17:
+          Value: false
+        S1L18:
+          Value: false
+        S1L19:
+          Value: false
+        S1L2:
+          Value: false
+        S1L3:
+          Value: false
+        S1L4:
+          Value: false
+        S1L5:
+          Value: false
+        S1L6:
+          Value: false
+        S1L7:
+          Value: false
+        S1L8:
+          Value: false
+        S1L9:
+          Value: false
+        S2L0:
+          Value: false
+        S2L1:
+          Value: false
+        S2L2:
+          Value: false
+        S2L3:
+          Value: false
+        S2L4:
+          Value: false
+        S2L5:
+          Value: false
+        S2L6:
+          Value: false
+        S2L7:
+          Value: false
+        S2L8:
+          Value: false
+        S2L9:
+          Value: true
+        base_link:
+          Value: true
+      Marker Scale: 5
       Name: TF
-      Show Arrows: true
+      Show Arrows: false
       Show Axes: true
       Show Names: true
       Tree:
-        {}
+        base_link:
+          S0L0:
+            {}
+          S0L1:
+            {}
+          S0L2:
+            {}
+          S0L3:
+            {}
+          S0L4:
+            {}
+          S0L5:
+            {}
+          S0L6:
+            {}
+          S0L7:
+            {}
+          S0L8:
+            {}
+          S0L9:
+            {}
+          S1L0:
+            {}
+          S1L1:
+            {}
+          S1L10:
+            {}
+          S1L11:
+            {}
+          S1L12:
+            {}
+          S1L13:
+            {}
+          S1L14:
+            {}
+          S1L15:
+            {}
+          S1L16:
+            {}
+          S1L17:
+            {}
+          S1L18:
+            {}
+          S1L19:
+            {}
+          S1L2:
+            {}
+          S1L3:
+            {}
+          S1L4:
+            {}
+          S1L5:
+            {}
+          S1L6:
+            {}
+          S1L7:
+            {}
+          S1L8:
+            {}
+          S1L9:
+            {}
+          S2L0:
+            {}
+          S2L1:
+            {}
+          S2L2:
+            {}
+          S2L3:
+            {}
+          S2L4:
+            {}
+          S2L5:
+            {}
+          S2L6:
+            {}
+          S2L7:
+            {}
+          S2L8:
+            {}
+          S2L9:
+            {}
       Update Interval: 0
-      Value: false
+      Value: true
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: cable_0
@@ -312,7 +476,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 0; 0; 0
+    Background Color: 74; 74; 74
     Fixed Frame: base_link
     Frame Rate: 30
   Name: root
@@ -334,24 +498,24 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 23.4724255
+      Distance: 20.267767
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.0995628312
-        Y: -0.0481608175
-        Z: -1.79605162
+        X: -0.23936753
+        Y: -0.581923723
+        Z: 1.4070611
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: -0.269797206
+      Pitch: -0.184797496
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.64229643
+      Yaw: 3.00728488
     Saved: ~
 Window Geometry:
   Displays:

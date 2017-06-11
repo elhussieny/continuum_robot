@@ -18,7 +18,7 @@
 
 using namespace std;
 #define PI 3.1415926
-#define RESOLUTION 100
+#define RESOLUTION 200
 
 class Continuum {
 private:
@@ -40,7 +40,8 @@ private:
 	 ofstream robotURDFfile;
 	 void createURDF(int segID, double length, int n_disks, double radius);
 	 void initCableMarker(int segID);
-
+	 tf::Quaternion getDiskQuaternion(int segID, int diskID);
+	 tf::Vector3 getDiskPosition(int segID, int i);
 public:
 	Continuum(int noOfSeg);
 	void addSegment(int segID, double length, int n_disks, double radius);
