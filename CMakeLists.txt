@@ -7,11 +7,13 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
   tf
   roslib
+   std_msgs
+  message_generation
+ 
 )
-
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp roslib
+  CATKIN_DEPENDS roscpp roslib message_runtime std_msgs
  LIBRARIES continuum_robot
 )
 
@@ -20,7 +22,6 @@ include_directories(${catkin_INCLUDE_DIRS})
 
 ## Declare a cpp library 
 add_library(${PROJECT_NAME} src/Continuum.cpp include/continuum_robot/Continuum.h)
-
 
 add_executable(basic_marker src/basic_marker.cpp)
 target_link_libraries(basic_marker ${catkin_LIBRARIES})

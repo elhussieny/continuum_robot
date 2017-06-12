@@ -12,6 +12,7 @@ Panels:
         - /MarkerArray1
         - /MarkerArray2
         - /MarkerArray3
+        - /Path1
       Splitter Ratio: 0.5
     Tree Height: 1135
   - Class: rviz/Selection
@@ -214,6 +215,56 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        S2L0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S2L9:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -272,7 +323,7 @@ Visualization Manager:
         S1L18:
           Value: false
         S1L19:
-          Value: true
+          Value: false
         S1L2:
           Value: false
         S1L3:
@@ -289,6 +340,26 @@ Visualization Manager:
           Value: false
         S1L9:
           Value: false
+        S2L0:
+          Value: false
+        S2L1:
+          Value: false
+        S2L2:
+          Value: false
+        S2L3:
+          Value: false
+        S2L4:
+          Value: false
+        S2L5:
+          Value: false
+        S2L6:
+          Value: false
+        S2L7:
+          Value: false
+        S2L8:
+          Value: false
+        S2L9:
+          Value: true
         base_link:
           Value: true
       Marker Scale: 5
@@ -358,6 +429,26 @@ Visualization Manager:
             {}
           S1L9:
             {}
+          S2L0:
+            {}
+          S2L1:
+            {}
+          S2L2:
+            {}
+          S2L3:
+            {}
+          S2L4:
+            {}
+          S2L5:
+            {}
+          S2L6:
+            {}
+          S2L7:
+            {}
+          S2L8:
+            {}
+          S2L9:
+            {}
       Update Interval: 0
       Value: true
     - Class: rviz/MarkerArray
@@ -381,12 +472,34 @@ Visualization Manager:
       Marker Topic: cable_2
       Name: MarkerArray
       Namespaces:
-        {}
+        basic_shapes: true
       Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 85; 255
+      Enabled: true
+      Head Diameter: 0.300000012
+      Head Length: 0.200000003
+      Length: 0.300000012
+      Line Style: Lines
+      Line Width: 0.0299999993
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Style: None
+      Radius: 0.0299999993
+      Shaft Diameter: 0.100000001
+      Shaft Length: 0.100000001
+      Topic: ""
+      Unreliable: false
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 74; 74; 74
+    Background Color: 255; 255; 255
     Fixed Frame: base_link
     Frame Rate: 30
   Name: root
@@ -408,24 +521,24 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 20.267767
+      Distance: 17.5610733
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.23936753
-        Y: -0.581923723
-        Z: 1.4070611
+        X: 0.101773255
+        Y: -3.01548839
+        Z: -0.134611994
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.275202632
+      Pitch: 0.145202637
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.69731903
+      Yaw: 1.5641104
     Saved: ~
 Window Geometry:
   Displays:
