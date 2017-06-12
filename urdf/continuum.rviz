@@ -214,56 +214,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        S2L0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L8:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         base_link:
           Alpha: 1
           Show Axes: false
@@ -322,7 +272,7 @@ Visualization Manager:
         S1L18:
           Value: false
         S1L19:
-          Value: false
+          Value: true
         S1L2:
           Value: false
         S1L3:
@@ -339,33 +289,13 @@ Visualization Manager:
           Value: false
         S1L9:
           Value: false
-        S2L0:
-          Value: false
-        S2L1:
-          Value: false
-        S2L2:
-          Value: false
-        S2L3:
-          Value: false
-        S2L4:
-          Value: false
-        S2L5:
-          Value: false
-        S2L6:
-          Value: false
-        S2L7:
-          Value: false
-        S2L8:
-          Value: false
-        S2L9:
-          Value: true
         base_link:
           Value: true
       Marker Scale: 5
       Name: TF
       Show Arrows: false
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
         base_link:
           S0L0:
@@ -428,26 +358,6 @@ Visualization Manager:
             {}
           S1L9:
             {}
-          S2L0:
-            {}
-          S2L1:
-            {}
-          S2L2:
-            {}
-          S2L3:
-            {}
-          S2L4:
-            {}
-          S2L5:
-            {}
-          S2L6:
-            {}
-          S2L7:
-            {}
-          S2L8:
-            {}
-          S2L9:
-            {}
       Update Interval: 0
       Value: true
     - Class: rviz/MarkerArray
@@ -471,7 +381,7 @@ Visualization Manager:
       Marker Topic: cable_2
       Name: MarkerArray
       Namespaces:
-        basic_shapes: true
+        {}
       Queue Size: 100
       Value: true
   Enabled: true
@@ -512,10 +422,10 @@ Visualization Manager:
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: -0.184797496
+      Pitch: 0.275202632
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.00728488
+      Yaw: 5.69731903
     Saved: ~
 Window Geometry:
   Displays:
