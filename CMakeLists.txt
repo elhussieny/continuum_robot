@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   roslib
    std_msgs
   message_generation
+  interactive_markers
  
 )
 catkin_package(
@@ -23,8 +24,8 @@ include_directories(${catkin_INCLUDE_DIRS})
 ## Declare a cpp library 
 add_library(${PROJECT_NAME} src/Continuum.cpp include/continuum_robot/Continuum.h)
 
-add_executable(basic_marker src/basic_marker.cpp)
-target_link_libraries(basic_marker ${catkin_LIBRARIES})
+add_executable(interface src/interface.cpp)
+target_link_libraries(interface ${catkin_LIBRARIES})
 
 add_executable(core_node src/core_node.cpp)
 target_link_libraries(core_node continuum_robot ${catkin_LIBRARIES})
