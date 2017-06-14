@@ -15,11 +15,12 @@
 #include <fstream>
 #include <ros/package.h>
 #include <visualization_msgs/MarkerArray.h>
+#include <termios.h>
 
 using namespace std;
 #define PI 3.1415926
 #define RESOLUTION 200
-
+#define INTERFACE 1
 class Continuum {
 private:
 	 tf::Transform* endEffectorPose;
@@ -28,13 +29,15 @@ private:
 	 tf::TransformBroadcaster* segTFBroadcaster;
 	 visualization_msgs::MarkerArray* cableMarkers;
 	 ros::Publisher* cablePublisher;
+	 ros::Timer frame_timer;
 
 	 double* segmentLength;
 	 int* noOfDisks;
 	 int numberOfSegments;
 	 double* segKappa;
 	 double* segPhi;
-
+	 struct termios initial_settings,
+	                new_settings;
 	 //-------------------------------------------------------------
 	 std_msgs::String robotName;
 	 ofstream robotURDFfile;
@@ -42,6 +45,7 @@ private:
 	 void initCableMarker(int segID);
 	 tf::Quaternion getDiskQuaternion(int segID, int diskID);
 	 tf::Vector3 getDiskPosition(int segID, int i);
+	 void timerScanning(const ros::TimerEvent&);
 public:
 	Continuum(int noOfSeg);
 	void addSegment(int segID, double length, int n_disks, double radius);

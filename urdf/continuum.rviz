@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Grid1
         - /RobotModel1
         - /TF1
         - /TF1/Frames1
@@ -37,11 +38,11 @@ Panels:
 Visualization Manager:
   Class: ""
   Displays:
-    - Alpha: 0.5
+    - Alpha: 1
       Cell Size: 1
       Class: rviz/Grid
-      Color: 160; 160; 164
-      Enabled: false
+      Color: 0; 0; 0
+      Enabled: true
       Line Style:
         Line Width: 0.0299999993
         Value: Lines
@@ -52,9 +53,9 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 10
+      Plane Cell Count: 100
       Reference Frame: <Fixed Frame>
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -71,6 +72,56 @@ Visualization Manager:
           Show Trail: false
           Value: true
         S0L1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L10:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L11:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L12:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L13:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L14:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L15:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L16:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L17:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L18:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S0L19:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -111,156 +162,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         S0L9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L10:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L11:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L12:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L13:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L14:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L15:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L16:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L17:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L18:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L19:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L8:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S1L9:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L8:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S2L9:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -284,6 +185,26 @@ Visualization Manager:
           Value: false
         S0L1:
           Value: false
+        S0L10:
+          Value: false
+        S0L11:
+          Value: false
+        S0L12:
+          Value: false
+        S0L13:
+          Value: false
+        S0L14:
+          Value: false
+        S0L15:
+          Value: false
+        S0L16:
+          Value: false
+        S0L17:
+          Value: false
+        S0L18:
+          Value: false
+        S0L19:
+          Value: false
         S0L2:
           Value: false
         S0L3:
@@ -300,68 +221,8 @@ Visualization Manager:
           Value: false
         S0L9:
           Value: false
-        S1L0:
-          Value: false
-        S1L1:
-          Value: false
-        S1L10:
-          Value: false
-        S1L11:
-          Value: false
-        S1L12:
-          Value: false
-        S1L13:
-          Value: false
-        S1L14:
-          Value: false
-        S1L15:
-          Value: false
-        S1L16:
-          Value: false
-        S1L17:
-          Value: false
-        S1L18:
-          Value: false
-        S1L19:
-          Value: false
-        S1L2:
-          Value: false
-        S1L3:
-          Value: false
-        S1L4:
-          Value: false
-        S1L5:
-          Value: false
-        S1L6:
-          Value: false
-        S1L7:
-          Value: false
-        S1L8:
-          Value: false
-        S1L9:
-          Value: false
-        S2L0:
-          Value: false
-        S2L1:
-          Value: false
-        S2L2:
-          Value: false
-        S2L3:
-          Value: false
-        S2L4:
-          Value: false
-        S2L5:
-          Value: false
-        S2L6:
-          Value: false
-        S2L7:
-          Value: false
-        S2L8:
-          Value: false
-        S2L9:
-          Value: true
         base_link:
-          Value: true
+          Value: false
       Marker Scale: 5
       Name: TF
       Show Arrows: false
@@ -372,6 +233,26 @@ Visualization Manager:
           S0L0:
             {}
           S0L1:
+            {}
+          S0L10:
+            {}
+          S0L11:
+            {}
+          S0L12:
+            {}
+          S0L13:
+            {}
+          S0L14:
+            {}
+          S0L15:
+            {}
+          S0L16:
+            {}
+          S0L17:
+            {}
+          S0L18:
+            {}
+          S0L19:
             {}
           S0L2:
             {}
@@ -389,66 +270,6 @@ Visualization Manager:
             {}
           S0L9:
             {}
-          S1L0:
-            {}
-          S1L1:
-            {}
-          S1L10:
-            {}
-          S1L11:
-            {}
-          S1L12:
-            {}
-          S1L13:
-            {}
-          S1L14:
-            {}
-          S1L15:
-            {}
-          S1L16:
-            {}
-          S1L17:
-            {}
-          S1L18:
-            {}
-          S1L19:
-            {}
-          S1L2:
-            {}
-          S1L3:
-            {}
-          S1L4:
-            {}
-          S1L5:
-            {}
-          S1L6:
-            {}
-          S1L7:
-            {}
-          S1L8:
-            {}
-          S1L9:
-            {}
-          S2L0:
-            {}
-          S2L1:
-            {}
-          S2L2:
-            {}
-          S2L3:
-            {}
-          S2L4:
-            {}
-          S2L5:
-            {}
-          S2L6:
-            {}
-          S2L7:
-            {}
-          S2L8:
-            {}
-          S2L9:
-            {}
       Update Interval: 0
       Value: true
     - Class: rviz/MarkerArray
@@ -464,7 +285,7 @@ Visualization Manager:
       Marker Topic: cable_1
       Name: MarkerArray
       Namespaces:
-        basic_shapes: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -472,7 +293,7 @@ Visualization Manager:
       Marker Topic: cable_2
       Name: MarkerArray
       Namespaces:
-        basic_shapes: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -521,7 +342,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 17.5610733
+      Distance: 22.884016
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -535,10 +356,10 @@ Visualization Manager:
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.145202637
-      Target Frame: <Fixed Frame>
+      Pitch: 0.680202723
+      Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 1.5641104
+      Yaw: 1.00411403
     Saved: ~
 Window Geometry:
   Displays:
@@ -546,7 +367,7 @@ Window Geometry:
   Height: 1416
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a000004fefc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000004fe000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000004fefc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000028000004fe000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000009d10000003efc0100000002fb0000000800540069006d00650100000000000009d10000030000fffffffb0000000800540069006d006501000000000000045000000000000000000000074c000004fe00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a000004fefc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c0061007900730100000028000004fe000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000015c000004fefc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730100000028000004fe000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000009d10000003efc0100000002fb0000000800540069006d00650100000000000009d10000030000fffffffb0000000800540069006d00650100000000000004500000000000000000000006ff000004fe00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:

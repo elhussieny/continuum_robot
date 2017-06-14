@@ -22,16 +22,59 @@ this->segTFBroadcaster = new tf::TransformBroadcaster[noOfSeg];
 this->segTFFrame  = (tf::Transform**) malloc(noOfSeg * sizeof(tf::Transform*)); // https://stackoverflow.com/questions/455960/dynamic-allocating-array-of-arrays-in-c
 this->cableMarkers = new visualization_msgs::MarkerArray[noOfSeg];
 this->cablePublisher = new ros::Publisher[noOfSeg];
+this->frame_timer = nh_.createTimer(ros::Duration(.01),&Continuum::timerScanning,this);
 for(int s=0; s<noOfSeg; s++)
 {
 	sprintf(cableTopic, "cable_%d", s);
 	cableMarkers[s].markers.resize(RESOLUTION);
 	cablePublisher[s] = nh_.advertise<visualization_msgs::MarkerArray>(cableTopic,1);
 }
+// Keyboard
+  tcgetattr(0,&initial_settings);
 
+   new_settings = initial_settings;
+   new_settings.c_lflag &= ~ICANON;
+   new_settings.c_lflag &= ~ECHO;
+   new_settings.c_lflag &= ~ISIG;
+   new_settings.c_cc[VMIN] = 0;
+   new_settings.c_cc[VTIME] = 0;
+
+   tcsetattr(0, TCSANOW, &new_settings);
 }
 /******************************************************/
+void Continuum::timerScanning(const ros::TimerEvent&){
+	static double thetaPitch = 90;
+		static double thetaYaw = 0;
+		int n = getchar();
 
+		  if (n == '\033') { // if the first value is esc
+			  getchar(); // skip the [
+		      switch(getchar()) { // the real value
+		          case 'A':
+
+		              cout<<"ARROW UP"<<endl;// code for arrow up
+		              thetaPitch+=90;
+		              break;
+
+		          case 'B':
+		              cout<<"ARROW DOWN"<<endl;// code for down up
+		              thetaPitch-=90;
+
+		              break;
+		          case 'C':
+		        	  cout<<"ARROW right"<<endl;// code for arrow right
+		        	  thetaYaw-=90;
+		              break;
+		          case 'D':
+		        	  cout<<"ARROW left"<<endl;// code for arrow left
+		        	  thetaYaw+=90;
+
+		        	  break;
+		      }
+		  }
+	basePose[0].setOrigin(basePose[0].getOrigin()+ tf::Matrix3x3(basePose[0].getRotation())*tf::Vector3(0,0,-(float(1)/140.0) * 2.0));
+	basePose[0].setRotation(tf::createQuaternionFromRPY(0.0, (thetaPitch*PI)/180, (thetaYaw*PI)/180));
+}
 void Continuum::addSegment(int segID, double segLength, int n_disks, double radius){	// TODO Auto-generated constructor stub
 	// Continuum robot segment
 	this->createURDF(segID, segLength, n_disks, radius);
@@ -117,12 +160,59 @@ tf::Vector3 Continuum::getDiskPosition(int segID, int i){
 }
 /******************************************************/
 void Continuum::update(void) {
+	if(INTERFACE){
+		char childFrameName[30];
+		ros::Rate rate(15);
+		this->segTFFrame[0][0].setOrigin(basePose[0].getOrigin());
+		this->segTFFrame[0][0].setRotation(basePose[0].getRotation());
+		//sprintf(childFrameName, "S%dL%d", 0,0);
+	//	segTFBroadcaster[0].sendTransform(tf::StampedTransform(segTFFrame[0][0], ros::Time::now(),"base_link",childFrameName));
+
+		for (int segID = 0;segID<this->numberOfSegments;segID++)
+		{
+		for(int i=noOfDisks[segID]-1;i>0;i--){
+
+			this->segTFFrame[segID][i].setOrigin(this->segTFFrame[segID][i-1].getOrigin()+tf::Matrix3x3(this->segTFFrame[segID][i-1].getRotation())*tf::Vector3(0,0,1));
+			this->segTFFrame[segID][i].setRotation(this->segTFFrame[segID][i-1].getRotation());
+		}
+
+
+		//	slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
+
+		for(int i=0;i<noOfDisks[segID];i++){
+			sprintf(childFrameName, "S%dL%d", segID,i);
+			segTFBroadcaster[segID].sendTransform(tf::StampedTransform(segTFFrame[segID][i], ros::Time::now(),"base_link",childFrameName));
+
+			}
+
+/*			for(int i=0;i<RESOLUTION&&ros::ok();i++){
+				eePc[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
+				eePc[1] =  sin(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
+				eePc[2] = (sin(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID]))/segKappa[segID]);
+
+				eePc =  tf::Matrix3x3(basePose[segID].getRotation())*eePc;
+				cableMarkers[segID].markers[i].pose.position.x = basePose[segID].getOrigin().x()+ eePc[0];
+						cableMarkers[segID].markers[i].pose.position.y = basePose[segID].getOrigin().y()+ eePc[1];
+						cableMarkers[segID].markers[i].pose.position.z = basePose[segID].getOrigin().z()+ eePc[2];
+				// Slerp for spherical interpolation
+				//	slerpQuaternionCable = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)RESOLUTION-1))));
+					cableMarkers[segID].markers[i].pose.orientation.x = 0;//slerpQuaternionCable.x();
+					cableMarkers[segID].markers[i].pose.orientation.y = 0;//slerpQuaternionCable.y();
+					cableMarkers[segID].markers[i].pose.orientation.z = 0;//slerpQuaternionCable.z();
+					cableMarkers[segID].markers[i].pose.orientation.w = 1;//slerpQuaternionCable.w();
+
+				}
+		cablePublisher[segID].publish(cableMarkers[segID]);*/
+		}
+		rate.sleep();
+	}
+	////////////////***************************
+/*	else{
 char childFrameName[30];
 ros::Rate rate(15);
 for (int segID = 0;segID<this->numberOfSegments;segID++)
 {
-	tf::Quaternion slerpQuaternion;
-	tf::Quaternion slerpQuaternionCable;
+
 	tf::Vector3 eeP;
 
 	tf::Vector3 eePc;
@@ -165,8 +255,9 @@ for(int i=0;i<noOfDisks[segID]&&ros::ok();i++){
 		}
 cablePublisher[segID].publish(cableMarkers[segID]);
 }
-rate.sleep();
 
+rate.sleep();
+	}*/
 }
 /******************************************************/
 
@@ -258,6 +349,8 @@ void Continuum::initCableMarker(int segID){
 /******************************************************/
 Continuum::~Continuum() {
 	// TODO Auto-generated destructor stub
+   tcsetattr(0, TCSANOW, &initial_settings);
+
 }
 
 
