@@ -14,6 +14,8 @@ Panels:
         - /MarkerArray2
         - /MarkerArray3
         - /Path1
+        - /MarkerArray4
+        - /MarkerArray4/Namespaces1
       Splitter Ratio: 0.5
     Tree Height: 1135
   - Class: rviz/Selection
@@ -42,7 +44,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 0; 0; 0
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.0299999993
         Value: Lines
@@ -55,7 +57,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 100
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
@@ -76,56 +78,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        S0L10:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L11:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L12:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L13:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L14:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L15:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L16:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L17:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L18:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        S0L19:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         S0L2:
           Alpha: 1
           Show Axes: false
@@ -146,22 +98,32 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        S0L6:
+        S1L0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        S0L7:
+        S1L1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        S0L8:
+        S1L2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        S0L9:
+        S1L3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S1L4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        S1L5:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -177,101 +139,19 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        S0L0:
-          Value: false
-        S0L1:
-          Value: false
-        S0L10:
-          Value: false
-        S0L11:
-          Value: false
-        S0L12:
-          Value: false
-        S0L13:
-          Value: false
-        S0L14:
-          Value: false
-        S0L15:
-          Value: false
-        S0L16:
-          Value: false
-        S0L17:
-          Value: false
-        S0L18:
-          Value: false
-        S0L19:
-          Value: false
-        S0L2:
-          Value: false
-        S0L3:
-          Value: false
-        S0L4:
-          Value: false
-        S0L5:
-          Value: false
-        S0L6:
-          Value: false
-        S0L7:
-          Value: false
-        S0L8:
-          Value: false
-        S0L9:
-          Value: false
-        base_link:
-          Value: false
       Marker Scale: 5
       Name: TF
       Show Arrows: false
       Show Axes: true
       Show Names: false
       Tree:
-        base_link:
-          S0L0:
-            {}
-          S0L1:
-            {}
-          S0L10:
-            {}
-          S0L11:
-            {}
-          S0L12:
-            {}
-          S0L13:
-            {}
-          S0L14:
-            {}
-          S0L15:
-            {}
-          S0L16:
-            {}
-          S0L17:
-            {}
-          S0L18:
-            {}
-          S0L19:
-            {}
-          S0L2:
-            {}
-          S0L3:
-            {}
-          S0L4:
-            {}
-          S0L5:
-            {}
-          S0L6:
-            {}
-          S0L7:
-            {}
-          S0L8:
-            {}
-          S0L9:
-            {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: cable_0
@@ -285,15 +165,15 @@ Visualization Manager:
       Marker Topic: cable_1
       Name: MarkerArray
       Namespaces:
-        {}
+        basic_shapes: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
       Enabled: true
-      Marker Topic: cable_2
+      Marker Topic: /cable_2
       Name: MarkerArray
       Namespaces:
-        {}
+        basic_shapes: true
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -318,6 +198,14 @@ Visualization Manager:
       Topic: ""
       Unreliable: false
       Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /headMarkers
+      Name: MarkerArray
+      Namespaces:
+        head: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 255; 255; 255
@@ -338,28 +226,30 @@ Visualization Manager:
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
+    - Class: rviz_plugin_tutorials/PlantFlag
+      Flags: ~
   Value: true
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 22.884016
+      Distance: 23.733408
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.101773255
-        Y: -3.01548839
-        Z: -0.134611994
+        X: -0.397702098
+        Y: -0.331911832
+        Z: 3.12587738
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.680202723
-      Target Frame: base_link
+      Pitch: 0.114797644
+      Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.00411403
+      Yaw: 1.54251409
     Saved: ~
 Window Geometry:
   Displays:

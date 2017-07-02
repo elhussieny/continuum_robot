@@ -80,7 +80,7 @@
 <visual>
 <geometry>
 <cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
+<origin rpy="0 0 0" xyz="0 0 6"/>
 </geometry>
 </visual>
 </link>
@@ -90,200 +90,89 @@
 <child link="S0L5"/>
 </joint>
 
-<link name="S0L6">
+
+<link name="S1L0">
 <visual>
 <geometry>
-<cylinder length="0.1" radius="0.4"/>
+<cylinder length="0.1" radius="0.3"/>
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
 </link>
 
-<joint name="S0J6" type="floating">
+<joint name="S1J0" type="floating">
 <parent link="base_link"/>
-<child link="S0L6"/>
+<child link="S1L0"/>
 </joint>
 
-<link name="S0L7">
+<link name="S1L1">
 <visual>
 <geometry>
-<cylinder length="0.1" radius="0.4"/>
+<cylinder length="0.1" radius="0.3"/>
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
 </link>
 
-<joint name="S0J7" type="floating">
+<joint name="S1J1" type="floating">
 <parent link="base_link"/>
-<child link="S0L7"/>
+<child link="S1L1"/>
 </joint>
 
-<link name="S0L8">
+<link name="S1L2">
 <visual>
 <geometry>
-<cylinder length="0.1" radius="0.4"/>
+<cylinder length="0.1" radius="0.3"/>
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
 </link>
 
-<joint name="S0J8" type="floating">
+<joint name="S1J2" type="floating">
 <parent link="base_link"/>
-<child link="S0L8"/>
+<child link="S1L2"/>
 </joint>
 
-<link name="S0L9">
+<link name="S1L3">
 <visual>
 <geometry>
-<cylinder length="0.1" radius="0.4"/>
+<cylinder length="0.1" radius="0.3"/>
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
 </link>
 
-<joint name="S0J9" type="floating">
+<joint name="S1J3" type="floating">
 <parent link="base_link"/>
-<child link="S0L9"/>
+<child link="S1L3"/>
 </joint>
 
-<link name="S0L10">
+<link name="S1L4">
 <visual>
 <geometry>
-<cylinder length="0.1" radius="0.4"/>
+<cylinder length="0.1" radius="0.3"/>
 <origin rpy="0 0 0" xyz="0 0 0"/>
 </geometry>
 </visual>
 </link>
 
-<joint name="S0J10" type="floating">
+<joint name="S1J4" type="floating">
 <parent link="base_link"/>
-<child link="S0L10"/>
+<child link="S1L4"/>
 </joint>
 
-<link name="S0L11">
+<link name="S1L5">
 <visual>
 <geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
+<cylinder length="0.1" radius="0.3"/>
+<origin rpy="0 0 0" xyz="0 0 6"/>
 </geometry>
 </visual>
 </link>
 
-<joint name="S0J11" type="floating">
+<joint name="S1J5" type="floating">
 <parent link="base_link"/>
-<child link="S0L11"/>
-</joint>
-
-<link name="S0L12">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J12" type="floating">
-<parent link="base_link"/>
-<child link="S0L12"/>
-</joint>
-
-<link name="S0L13">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J13" type="floating">
-<parent link="base_link"/>
-<child link="S0L13"/>
-</joint>
-
-<link name="S0L14">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J14" type="floating">
-<parent link="base_link"/>
-<child link="S0L14"/>
-</joint>
-
-<link name="S0L15">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J15" type="floating">
-<parent link="base_link"/>
-<child link="S0L15"/>
-</joint>
-
-<link name="S0L16">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J16" type="floating">
-<parent link="base_link"/>
-<child link="S0L16"/>
-</joint>
-
-<link name="S0L17">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J17" type="floating">
-<parent link="base_link"/>
-<child link="S0L17"/>
-</joint>
-
-<link name="S0L18">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 0"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J18" type="floating">
-<parent link="base_link"/>
-<child link="S0L18"/>
-</joint>
-
-<link name="S0L19">
-<visual>
-<geometry>
-<cylinder length="0.1" radius="0.4"/>
-<origin rpy="0 0 0" xyz="0 0 10"/>
-</geometry>
-</visual>
-</link>
-
-<joint name="S0J19" type="floating">
-<parent link="base_link"/>
-<child link="S0L19"/>
+<child link="S1L5"/>
 </joint>
 
 </robot>
