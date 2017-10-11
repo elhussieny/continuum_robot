@@ -21,11 +21,12 @@ using namespace std;
 #define PI 3.1415926
 #define RESOLUTION 200
 #define INTERFACE 0
-#define delay 2
+#define delay 1
 #define HEAD 1
 #define TAIL 0
 #define FLIPPED 1
 #define NORMAL 0
+#define UPDATERATE 50
 class Continuum {
 private:
 	 tf::Transform* endEffectorPose;
@@ -41,10 +42,10 @@ private:
 	 int headDisks;
 	 double headLength;
 	 double* arrayOfKappa;
+	 double* arrayOfPhi;
 	 double* segmentLength;
 	 int* noOfDisks;
 	 int* segmentMode;
-	 int numberOfSegments;
 	 double* segKappa;
 	 double* segPhi;
 	 double headPhi;
@@ -52,6 +53,7 @@ private:
 	 double headKappa;
 	 struct termios initial_settings,
 	                new_settings;
+	 int rateOfUpdate;
 	 //-------------------------------------------------------------
 	 std_msgs::String robotName;
 	 ofstream robotURDFfile;
@@ -64,13 +66,16 @@ private:
 	 void timerScanning(const ros::TimerEvent&);
 public:
 	Continuum(int noOfSeg);
+	 int numberOfSegments;
+
 	void addSegment(int segID, double length, int n_disks, double radius);
 
 	void setSegmentBasePose(int segID, tf::Vector3 basePos, tf::Quaternion baseRot);
-	void setSegmentShape(int segID, double kappa, double phi, int mode);
+	void setSegmentShape(int segID, double kappa, double phi);
 	void update(void);
 	void addHead(double len, int disks, double rad);
 	void setHeadParameters(double headKap, double headPhi, int MODE);
+
 
 	virtual ~Continuum();
 };

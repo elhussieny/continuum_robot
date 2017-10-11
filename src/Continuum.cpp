@@ -22,9 +22,11 @@ this->segPhi = new double[noOfSeg];
 this->segTFBroadcaster = new tf::TransformBroadcaster[noOfSeg];
 this->segTFFrame  = (tf::Transform**) malloc(noOfSeg * sizeof(tf::Transform*)); // https://stackoverflow.com/questions/455960/dynamic-allocating-array-of-arrays-in-c
 this->arrayOfKappa = new double[(noOfSeg+1)*delay];
+this->arrayOfPhi = new double[(noOfSeg+1)*delay];
+
 this->cableMarkers = new visualization_msgs::MarkerArray[noOfSeg+1];
 this->cablePublisher = new ros::Publisher[noOfSeg+1];
-this->frame_timer = nh_.createTimer(ros::Duration(.01),&Continuum::timerScanning,this);
+this->frame_timer = nh_.createTimer(ros::Duration(0.1),&Continuum::timerScanning,this);
 for(int s=0; s<=noOfSeg; s++)
 {
 	sprintf(cableTopic, "cable_%d", s);
@@ -47,13 +49,16 @@ this->headLength = 0;
 this->headKappa = 0.00001;
 this->headPhi =0;
    tcsetattr(0, TCSANOW, &new_settings);
+this->rateOfUpdate =0;
+this->headMode = NORMAL;
 }
 /******************************************************/
-void Continuum::timerScanning(const ros::TimerEvent&){
+void Continuum::timerScanning(const ros::TimerEvent&){ // for keyboard interface
 	if(noOfDisks[0]<1) return; // to make sure the robot isinitialized
 	static double thetaPitch = 0;
 		static double thetaYaw = 0;
 		static double targetKappa=0.00001;
+		static double targetPhi=0.0;
 		char childFrameName[30];
 
 		int n = getchar();
@@ -64,44 +69,71 @@ void Continuum::timerScanning(const ros::TimerEvent&){
 		          case 'A':
 
 		              cout<<"ARROW UP"<<endl;// code for arrow up
-		              thetaPitch+=10;
+		              thetaPitch-=90;
 		              targetKappa = float(thetaPitch*PI)/(180*segmentLength[0]);
-		              if (targetKappa ==0) targetKappa = 0.00001;
-		    		  this->setHeadParameters(targetKappa,0,NORMAL); // SegID , Kappa, Phi
-
+		              arrayOfKappa[0] = targetKappa;
+		              thetaYaw=0;
+		              targetPhi = float (thetaYaw*PI)/180;
+		              arrayOfPhi[0] = targetPhi;
 		              break;
 
 		          case 'B':
 		              cout<<"ARROW DOWN"<<endl;// code for down up
-		              thetaPitch-=10;
+		              thetaPitch+=90;
 		              targetKappa = float(thetaPitch*PI)/(180*segmentLength[0]);
-		             if (targetKappa ==0) targetKappa = 0.00001;
-		             this->setHeadParameters(targetKappa,0,NORMAL); // SegID , Kappa, Phi
+		              arrayOfKappa[0] = targetKappa;
+		              thetaYaw=0;
+		              targetPhi = float (thetaYaw*PI)/180;
+		              arrayOfPhi[0] = targetPhi;
 		              break;
-		        case 'C':
+
+		          case 'C':
 		        	  cout<<"ARROW right"<<endl;// code for arrow right
-		        	//  thetaYaw-=90;
-		        	  this->setHeadParameters(0.00001,0,FLIPPED); // SegID , Kappa, Phi
-		              thetaPitch=0;
+		        	  thetaPitch+=90;
+		        	  targetKappa = float(thetaPitch*PI)/(180*segmentLength[0]);
+		        	  arrayOfKappa[0] = targetKappa;
+		        	  thetaYaw=90;
+		        	  targetPhi = float (thetaYaw*PI)/180;
+		              arrayOfPhi[0] = targetPhi;
 
 		        	  break;
-		              /*  case 'D':
+
+		          case 'D':
 		        	  cout<<"ARROW left"<<endl;// code for arrow left
-		        	  thetaYaw+=90;
+		        	  thetaPitch-=90;
+		        	  targetKappa = float(thetaPitch*PI)/(180*segmentLength[0]);
+		        	  arrayOfKappa[0] = targetKappa;
+		        	  thetaYaw=90;
+		        	  targetPhi = float (thetaYaw*PI)/180;
+		        	  arrayOfPhi[0] = targetPhi;
+		        	  break;
 
-		        	  break;*/
 		      }
+		      this->setHeadParameters(arrayOfKappa[0],arrayOfPhi[0],NORMAL);
 		  }
+// Update rotation
 
-//arrayOfKappa[0] = targetKappa;
-//for (int i=1;i<(numberOfSegments+1)*delay;i++)
+if(++rateOfUpdate==UPDATERATE){
+	for(int i=0; i<=numberOfSegments; i++)
+	{
+	if(i==0){if(arrayOfKappa[0]==0)this->setHeadParameters(0,0,FLIPPED);} // SegID , Kappa, Phi
+	else 	this->setSegmentShape(i-1,-arrayOfKappa[i*delay],targetPhi); // SegID , Kappa, Phi
+
+	}
+	for (int i=((numberOfSegments+1)*delay)-1;i>0;i--)
+		arrayOfKappa[i] = arrayOfKappa[i-1];
+	targetKappa = 0; arrayOfKappa[0] = targetKappa;thetaPitch=0;
+
+	rateOfUpdate = 0;
+}
 
 
+update();
 //		  this->setSegmentShape(1,0.000001,0); // SegID , Kappa, Phi
 
 		//	basePose[0].setRotation(tf::createQuaternionFromRPY(0.0, (thetaPitch*PI)/180,0.0/*(thetaYaw*PI)/180)*/));
 		//	basePose[0].setOrigin(basePose[0].getOrigin()+ tf::Matrix3x3(basePose[0].getRotation())*tf::Vector3(0,0,-(float(1)/140.0) * 2.0));
-//update();
+//
 
 
 }
@@ -137,13 +169,22 @@ else
 void Continuum::setSegmentBasePose(int segID, tf::Vector3 basePos, tf::Quaternion baseRot){
 	basePose[segID].setOrigin(basePos);
 	basePose[segID].setRotation(baseRot);
+
+	for (int s=segID+1;s<this->numberOfSegments;s++)
+
+	{
+
+		basePose[s].setOrigin(basePose[s-1].getOrigin() + (tf::Matrix3x3(basePose[s-1].getRotation())*getDiskPosition(s-1,(noOfDisks[s-1]-1))));
+		basePose[s].setRotation(basePose[s-1].getRotation()*getDiskQuaternion(s-1,(noOfDisks[s-1]-1)));
+
+	}
 	}
 
-/******************************************************/
-void Continuum::setSegmentShape(int segID, double kappa, double phi, int mode){
+	/******************************************************/
+void Continuum::setSegmentShape(int segID, double kappa, double phi){
+	if(kappa == 0) kappa = 0.0000001;
 	segKappa[segID] = kappa;
 	segPhi[segID] = phi;
-segmentMode[segID] = mode;
 tf::Matrix3x3 Rot;
 tf::Quaternion qRot;
 Rot.setValue(pow(cos(phi),2) * (cos(kappa*segmentLength[segID]) - 1) + 1, sin(phi)*cos(phi)*( cos(kappa*segmentLength[segID]) - 1), -cos(phi)*sin(kappa*segmentLength[segID]),
@@ -182,6 +223,7 @@ return qRot;
 
 }
 
+/******************************************************/
 tf::Quaternion Continuum::getHeadQuaternion(int diskID){
 tf::Matrix3x3 Rot;
 tf::Quaternion qRot;
@@ -205,54 +247,11 @@ tf::Vector3 Continuum::getDiskPosition(int segID, int i){
 }
 /******************************************************/
 void Continuum::update(void) {
-//	if(INTERFACE){
-//		char childFrameName[30];
-//		//ros::Rate rate(1);
-//
-//
-//		for (int segID = 0;segID<this->numberOfSegments;segID++)
-//		{
-//		for(int i=noOfDisks[segID]-1;i>0;i--){
-//
-//			this->segTFFrame[segID][i].setOrigin(this->segTFFrame[segID][i-1].getOrigin()+tf::Matrix3x3(this->segTFFrame[segID][i-1].getRotation())*tf::Vector3(0,0,1));
-//			this->segTFFrame[segID][i].setRotation(this->segTFFrame[segID][i-1].getRotation());
-//		}
-//
-//
-//		//	slerpQuaternion = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)noOfDisks[segID]-1))));
-//
-//		for(int i=1;i<noOfDisks[segID];i++){
-//			sprintf(childFrameName, "S%dL%d", segID,i);
-//			segTFBroadcaster[segID].sendTransform(tf::StampedTransform(segTFFrame[segID][i], ros::Time::now(),"base_link",childFrameName));
-//
-//			}
-//
-///*			for(int i=0;i<RESOLUTION&&ros::ok();i++){
-//				eePc[0] = cos(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
-//				eePc[1] =  sin(segPhi[segID])*(cos(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID])) - 1)/segKappa[segID];
-//				eePc[2] = (sin(segKappa[segID]*((i/((double)RESOLUTION-1))*segmentLength[segID]))/segKappa[segID]);
-//
-//				eePc =  tf::Matrix3x3(basePose[segID].getRotation())*eePc;
-//				cableMarkers[segID].markers[i].pose.position.x = basePose[segID].getOrigin().x()+ eePc[0];
-//						cableMarkers[segID].markers[i].pose.position.y = basePose[segID].getOrigin().y()+ eePc[1];
-//						cableMarkers[segID].markers[i].pose.position.z = basePose[segID].getOrigin().z()+ eePc[2];
-//				// Slerp for spherical interpolation
-//				//	slerpQuaternionCable = basePose[segID].getRotation().slerp(endEffectorPose[segID].getRotation(),(double)((i/((double)RESOLUTION-1))));
-//					cableMarkers[segID].markers[i].pose.orientation.x = 0;//slerpQuaternionCable.x();
-//					cableMarkers[segID].markers[i].pose.orientation.y = 0;//slerpQuaternionCable.y();
-//					cableMarkers[segID].markers[i].pose.orientation.z = 0;//slerpQuaternionCable.z();
-//					cableMarkers[segID].markers[i].pose.orientation.w = 1;//slerpQuaternionCable.w();
-//
-//				}
-//		cablePublisher[segID].publish(cableMarkers[segID]);*/
-//		}
-//		//rate.sleep();
-//	}
-	////////////////***************************
-	//else{
 char childFrameName[30];
 ros::Rate rate(15);
 tf::Vector3 heeP;
+/*************************************** WITH HEAD *********************************************/
+
 if(this->hasHead)
 {
 
@@ -367,6 +366,7 @@ for (int segID = 0;segID<this->numberOfSegments;segID++)
 
 		}
 cablePublisher[segID].publish(cableMarkers[segID]);
+
 }
 
 rate.sleep();
@@ -490,8 +490,8 @@ uint32_t shape = visualization_msgs::Marker::CYLINDER;
 	    // Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
 
 	    // Set the scale of the marker -- 1x1x1 here means 1m on a side
-		  headMarkers.markers[r].scale.x = rad;
-		  headMarkers.markers[r].scale.y = rad;
+		  headMarkers.markers[r].scale.x = 2*rad;
+		  headMarkers.markers[r].scale.y = 2*rad;
 		  headMarkers.markers[r].scale.z = 0.1;
 
 	    // Set the color -- be sure to set alpha to something non-zero!
@@ -505,8 +505,10 @@ uint32_t shape = visualization_msgs::Marker::CYLINDER;
 }
 
 void Continuum::setHeadParameters(double headKap, double headPhi, int MODE){
+	if(headKap==0)headKap=0.0000001;
 	this->headKappa = headKap;
 	this->headMode = MODE;
+	this->headPhi = headPhi;
 }
 Continuum::~Continuum() {
 	// TODO Auto-generated destructor stub
