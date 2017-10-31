@@ -1,10 +1,16 @@
 
 https://www.youtube.com/watch?v=x0Cn3piElnU&feature=youtu.be
+
 To run the demo visualization on youtube:
+
 1- download the package from github.
+
 2- catkin_make your ROS workspace.
+
 3- $roscore
+
 4- $rosrun continumm_robot core_node
+
 5- roslaunch continuum_robot visulize.launch
 
 
