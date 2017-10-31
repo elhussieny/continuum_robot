@@ -53,8 +53,8 @@ this->rateOfUpdate =0;
 this->headMode = NORMAL;
 }
 /******************************************************/
-void Continuum::timerScanning(const ros::TimerEvent&){ // for keyboard interface
-	if(noOfDisks[0]<1) return; // to make sure the robot isinitialized
+void Continuum::timerScanning(const ros::TimerEvent&){ // for keyboard interface (Not Used~!)
+/*	if(noOfDisks[0]<1) return; // to make sure the robot isinitialized
 	static double thetaPitch = 0;
 		static double thetaYaw = 0;
 		static double targetKappa=0.00001;
@@ -131,10 +131,10 @@ if(++rateOfUpdate==UPDATERATE){
 update();
 //		  this->setSegmentShape(1,0.000001,0); // SegID , Kappa, Phi
 
-		//	basePose[0].setRotation(tf::createQuaternionFromRPY(0.0, (thetaPitch*PI)/180,0.0/*(thetaYaw*PI)/180)*/));
+		//	basePose[0].setRotation(tf::createQuaternionFromRPY(0.0, (thetaPitch*PI)/180,0.0/*(thetaYaw*PI)/180)));
 		//	basePose[0].setOrigin(basePose[0].getOrigin()+ tf::Matrix3x3(basePose[0].getRotation())*tf::Vector3(0,0,-(float(1)/140.0) * 2.0));
 //
-
+*/
 
 }
 /******************************************************/
@@ -224,15 +224,15 @@ return qRot;
 }
 
 /******************************************************/
-tf::Quaternion Continuum::getHeadQuaternion(int diskID){
-tf::Matrix3x3 Rot;
+tf::Quaternion Continuum::getHeadQuaternion(int diskID){ // Not Used~!
+/*tf::Matrix3x3 Rot;
 tf::Quaternion qRot;
 Rot.setValue(pow(cos(headPhi),2) * (cos(headKappa*((diskID/((double)headDisks-1))*headLength)) - 1) + 1, sin(headPhi)*cos(headPhi)*( cos(headKappa*((diskID/((double)headDisks-1))*headLength)) - 1), -cos(headPhi)*sin(headKappa*((diskID/((double)headDisks-1))*headLength)),
 						sin(headPhi)*cos(headPhi)*( cos(headKappa*((diskID/((double)headDisks-1))*headLength)) - 1), pow(cos(headPhi),2) * ( 1 - cos(headKappa*((diskID/((double)headDisks-1))*headLength)) ) + cos( headKappa * ((diskID/((double)headDisks-1))*headLength)),  -sin(headPhi)*sin(headKappa*((diskID/((double)headDisks-1))*headLength)),
 						 cos(headPhi)*sin(headKappa*((diskID/((double)headDisks-1))*headLength)),  sin(headPhi)*sin(headKappa*((diskID/((double)headDisks-1))*headLength)), cos(headKappa*((diskID/((double)headDisks-1))*headLength)));
 Rot.getRotation(qRot);
 //endEffectorPose[segID].setRotation(basePose[segID].getRotation() * qRot);
-return qRot;
+return qRot;*/
 
 }
 
@@ -252,7 +252,7 @@ ros::Rate rate(15);
 tf::Vector3 heeP;
 /*************************************** WITH HEAD *********************************************/
 
-if(this->hasHead)
+/*if(this->hasHead)  // Not Used~!
 {
 
 	if(headMode == FLIPPED)
@@ -321,7 +321,7 @@ if(this->hasHead)
 	headPublisher.publish(headMarkers);
 	cablePublisher[this->numberOfSegments].publish(cableMarkers[this->numberOfSegments]);
 
-}
+}*/
 /*************************************** NO HEAD *********************************************/
 for (int segID = 0;segID<this->numberOfSegments;segID++)
 {
@@ -505,10 +505,10 @@ uint32_t shape = visualization_msgs::Marker::CYLINDER;
 }
 
 void Continuum::setHeadParameters(double headKap, double headPhi, int MODE){
-	if(headKap==0)headKap=0.0000001;
+/*	if(headKap==0)headKap=0.0000001;
 	this->headKappa = headKap;
 	this->headMode = MODE;
-	this->headPhi = headPhi;
+	this->headPhi = headPhi;*/
 }
 Continuum::~Continuum() {
 	// TODO Auto-generated destructor stub
