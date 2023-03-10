@@ -7,11 +7,13 @@
 
 #include"continuum_robot/Continuum.h"
 
-Continuum::Continuum(int noOfSeg){	// TODO Auto-generated constructor stub
+Continuum::Continuum(){	// TODO Auto-generated constructor stub
 // TODO Robot name
 	ros::NodeHandle nh_;
 	char cableTopic[30];
-this->numberOfSegments = noOfSeg;
+nh_.param("number_of_sections",this->numberOfSegments, 3);
+// this->numberOfSegments = nh_.getP("number_of_sections", 3);
+int noOfSeg = this->numberOfSegments;
 this->segmentLength = new double(noOfSeg);
 this->segmentMode = new int(noOfSeg);
 this->noOfDisks = new int(noOfSeg);

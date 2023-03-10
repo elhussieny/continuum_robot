@@ -1,5 +1,8 @@
 <launch>
 <arg name="gui" default="False" />
     <param name="robot_description" textfile="$(find continuum_robot)/urdf/robot_model.urdf"/>
+    <param name="number_of_sections" value="2"/>
+<node name="core_node" pkg="continuum_robot" type="core_node" output="screen" />
 <node name="rviz" pkg="rviz" type="rviz" args="-d $(find continuum_robot)/urdf/continuum.rviz"/>
+
 </launch>

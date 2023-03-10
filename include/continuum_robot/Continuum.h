@@ -19,7 +19,7 @@
 
 using namespace std;
 #define PI 3.1415926
-#define RESOLUTION 200
+#define RESOLUTION 100
 #define INTERFACE 0
 #define delay 1
 #define HEAD 1
@@ -65,7 +65,7 @@ private:
 	 tf::Vector3 getDiskPosition(int segID, int i);
 	 void timerScanning(const ros::TimerEvent&);
 public:
-	Continuum(int noOfSeg);
+	Continuum();
 	 int numberOfSegments;
 
 	void addSegment(int segID, double length, int n_disks, double radius);
