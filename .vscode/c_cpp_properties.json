@@ -1,0 +1,61 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/haitham/catkin_workspace/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/haitham/catkin_ws/devel/include/**",
+        "/home/haitham/catkin_workspace/src/action_lib_pkg/include/**",
+        "/home/haitham/catkin_ws/src/basic_mapping/include/**",
+        "/home/haitham/catkin_ws/src/beginner_tutorials/include/**",
+        "/home/haitham/catkin_ws/src/closed_loop_turtle/include/**",
+        "/home/haitham/catkin_workspace/src/continuum_robot/include/**",
+        "/home/haitham/catkin_ws/src/control_turtle/include/**",
+        "/home/haitham/catkin_ws/src/kalman_filters_files/ekf_ukf/include/**",
+        "/home/haitham/catkin_workspace/src/face_detection/include/**",
+        "/home/haitham/catkin_ws/src/first_talker/include/**",
+        "/home/haitham/catkin_ws/src/first_tutorial/include/**",
+        "/home/haitham/catkin_ws/src/image_viewer/include/**",
+        "/home/haitham/catkin_ws/src/kalman_tracking/include/**",
+        "/home/haitham/catkin_ws/src/laser_line_extraction/include/**",
+        "/home/haitham/catkin_ws/src/localization_pioneer/include/**",
+        "/home/haitham/catkin_ws/src/move_pioneer/include/**",
+        "/home/haitham/catkin_ws/src/mte431_project/include/**",
+        "/home/haitham/catkin_ws/src/my_custom_msg/include/**",
+        "/home/haitham/catkin_ws/src/my_first_add_int/include/**",
+        "/home/haitham/catkin_workspace/src/my_first_launch/include/**",
+        "/home/haitham/catkin_ws/src/my_first_package/include/**",
+        "/home/haitham/catkin_ws/src/my_image_processing/include/**",
+        "/home/haitham/catkin_ws/src/myfirstmsg/include/**",
+        "/home/haitham/catkin_ws/src/myfirstopencv/include/**",
+        "/home/haitham/catkin_workspace/src/myfirstpackage/include/**",
+        "/home/haitham/catkin_ws/src/mypakage/include/**",
+        "/home/haitham/catkin_ws/src/opencv_pkg/include/**",
+        "/home/haitham/catkin_ws/src/opencv_tutorial/include/**",
+        "/home/haitham/catkin_ws/src/pioneer_control/include/**",
+        "/home/haitham/catkin_ws/src/pioneer_loc_visualize/include/**",
+        "/home/haitham/catkin_ws/src/pioneer_motion_control/include/**",
+        "/home/haitham/catkin_ws/src/second_package/include/**",
+        "/home/haitham/catkin_ws/src/service_mte/include/**",
+        "/home/haitham/catkin_ws/src/simulate_pid/include/**",
+        "/home/haitham/catkin_ws/src/task3/include/**",
+        "/home/haitham/catkin_workspace/src/turtle3_control/include/**",
+        "/home/haitham/catkin_ws/src/turtlebot3_simulations/turtlebot3_fake/include/**",
+        "/home/haitham/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/haitham/catkin_workspace/src/turtlepubsub/include/**",
+        "/home/haitham/catkin_ws/src/v2v_package/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

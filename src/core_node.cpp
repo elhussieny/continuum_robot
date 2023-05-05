@@ -23,7 +23,7 @@ printf("Number of segments: %d",robot.numberOfSegments);
 for(int i=0;i<=robot.numberOfSegments;i++)
 {
 
-robot.addSegment(i,5*(i+1),30,.3); // SegID , Length, noOfSegments, radius of disk
+robot.addSegment(i,5*(i+1),20,.3); // SegID , Length, noOfSegments, radius of disk
  robot.setSegmentShape(0,0.0001,0); // SegID , Kappa, Phi
 }
  
@@ -43,13 +43,13 @@ robot.addSegment(i,5*(i+1),30,.3); // SegID , Length, noOfSegments, radius of di
   { // set a pattern
 for(double i=0.25;i>=-0.25;i=i-0.0051)
 {
-robot.setSegmentShape(0,i,0); // SegID , Kappa, Phi
+robot.setSegmentShape(0,i,PI/4); // SegID , Kappa, Phi
 robot.update();
 }
 
 for(double i=-0.25;i<=0.25;i=i+0.00515)
 {
-robot.setSegmentShape(0,i,0); // SegID , Kappa, Phi
+robot.setSegmentShape(0,i,PI/4); // SegID , Kappa, Phi
 robot.update();
 }
 
