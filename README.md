@@ -15,3 +15,14 @@ Notes:
 - The continuum robot class depends on creating the URDF file at first with the specified number of sections which appears in the core_node.cpp file. If you change the construction of the robot again in the core file (number of sections, lengths, the radius of disks ..) you need to restart the launch file again because it looks for the URDF file at the beginning.
 
 
+Trophy:
+
+@article{seleem2019guided,
+  title={Guided pose planning and tracking for multi-section continuum robots considering robot dynamics},
+  author={Seleem, Ibrahim A and Assal, Samy FM and Ishii, Hiroyuki and El-Hussieny, Haitham},
+  journal={IEEE Access},
+  volume={7},
+  pages={166690--166703},
+  year={2019},
+  publisher={IEEE}
+}
