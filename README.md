@@ -8,6 +8,7 @@ To run the demo visualization on youtube:
 2- catkin_make your ROS workspace.
 
 3- Launch the continuum robot visualizer
+
 roslaunch continuum_robot visulize.launch
 
 Notes:
