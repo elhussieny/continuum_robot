@@ -17,12 +17,4 @@ Notes:
 
 Cite as:
 
-@article{seleem2019guided,
-  title={Guided pose planning and tracking for multi-section continuum robots considering robot dynamics},
-  author={Seleem, Ibrahim A and Assal, Samy FM and Ishii, Hiroyuki and El-Hussieny, Haitham},
-  journal={IEEE Access},
-  volume={7},
-  pages={166690--166703},
-  year={2019},
-  publisher={IEEE}
-  }
+Seleem, Ibrahim A., Samy FM Assal, Hiroyuki Ishii, and Haitham El-Hussieny. "Guided pose planning and tracking for multi-section continuum robots considering robot dynamics." IEEE Access 7 (2019): 166690-166703.
